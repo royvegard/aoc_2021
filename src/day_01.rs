@@ -27,8 +27,8 @@ pub fn part_2(inp: String) -> i32 {
     let mut increased_depth = 0;
 
     for i in 3..input.len() {
-        let current_window = input[i] + input[i - 1] + input[i - 2];
-        let previous_window = input[i - 1] + input[i - 2] + input[i - 3];
+        let current_window = input[i];
+        let previous_window = input[i - 3];
 
         if previous_window < current_window {
             increased_depth += 1;
