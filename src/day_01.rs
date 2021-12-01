@@ -1,12 +1,7 @@
 use std::fs;
 
 pub fn part_1(inp: String) -> i32 {
-    let input: Vec<u32> = fs::read_to_string(inp)
-        .expect("Something went wrong")
-        .lines()
-        .map(|n| n.parse::<u32>().unwrap())
-        .collect();
-
+    let input = parse_input(inp);
     let mut increased_depth = 0;
 
     for i in 1..input.len() {
@@ -18,12 +13,7 @@ pub fn part_1(inp: String) -> i32 {
 }
 
 pub fn part_2(inp: String) -> i32 {
-    let input: Vec<u32> = fs::read_to_string(inp)
-        .expect("Something went wrong")
-        .lines()
-        .map(|n| n.parse::<u32>().unwrap())
-        .collect();
-
+    let input = parse_input(inp);
     let mut increased_depth = 0;
 
     for i in 3..input.len() {
@@ -32,6 +22,14 @@ pub fn part_2(inp: String) -> i32 {
         }
     }
     increased_depth
+}
+
+fn parse_input(inp: String) -> Vec<u32> {
+    fs::read_to_string(inp)
+        .expect("Something went wrong")
+        .lines()
+        .map(|n| n.parse::<u32>().unwrap())
+        .collect::<Vec<u32>>()
 }
 
 #[cfg(test)]
