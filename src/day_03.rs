@@ -88,7 +88,7 @@ fn parse_input(inp: String) -> Vec<String> {
     output
 }
 
-fn get_most_common(inp: &Vec<String>, column: usize) -> char {
+fn get_most_common(inp: &[String], column: usize) -> char {
     let mut zeros = 0;
     let mut ones = 0;
 
@@ -107,7 +107,7 @@ fn get_most_common(inp: &Vec<String>, column: usize) -> char {
     }
 }
 
-fn trim(inp: &Vec<String>, bit: char, column: usize) -> Vec<String> {
+fn trim(inp: &[String], bit: char, column: usize) -> Vec<String> {
     inp.iter()
         .filter(|l| l.as_bytes()[column] == bit as u8)
         .map(|s| s.to_owned())
