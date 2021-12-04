@@ -35,7 +35,7 @@ impl BingoBoard {
 
     fn check_board(&mut self) -> bool {
         for row in &self.marked {
-            if row.iter().filter(|&m| *m == true).count() == row.len() {
+            if row.iter().filter(|&m| *m).count() == row.len() {
                 self.has_bingo = true;
                 return true;
             }
