@@ -24,29 +24,16 @@ impl LineSegment {
     fn get_points(&self) -> Vec<Point> {
         let mut points: Vec<Point> = Vec::new();
 
-        if self.is_horizontal() {
-            let min_x = self.p1.x.min(self.p2.x);
-            let max_x = self.p1.x.max(self.p2.x);
-            for x in min_x..=max_x {
-                points.push(Point { x, y: self.p1.y });
-            }
-        } else if self.is_vertical() {
-            let min_y = self.p1.y.min(self.p2.y);
-            let max_y = self.p1.y.max(self.p2.y);
-            for y in min_y..=max_y {
-                points.push(Point { x: self.p1.x, y });
-            }
-        } else {
-            let direction = (
-                self.p2.x as i32 - self.p1.x as i32,
-                self.p2.y as i32 - self.p1.y as i32,
-            );
-            for i in 0..=i32::abs(direction.0) {
-                points.push(Point {
-                    x: (self.p1.x as i32 + i * direction.0.signum()) as usize,
-                    y: (self.p1.y as i32 + i * direction.1.signum()) as usize,
-                });
-            }
+        let direction = (
+            self.p2.x as i32 - self.p1.x as i32,
+            self.p2.y as i32 - self.p1.y as i32,
+        );
+        let steps = i32::max(i32::abs(direction.0), i32::abs(direction.1));
+        for i in 0..=steps {
+            points.push(Point {
+                x: (self.p1.x as i32 + i * direction.0.signum()) as usize,
+                y: (self.p1.y as i32 + i * direction.1.signum()) as usize,
+            });
         }
         points
     }
