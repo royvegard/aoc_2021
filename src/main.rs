@@ -3,6 +3,7 @@ mod day_02;
 mod day_03;
 mod day_04;
 mod day_05;
+mod day_06;
 
 fn main() {
     println!("Day 1: Sonar Sweep");
@@ -53,5 +54,15 @@ fn main() {
     println!(
         "\tPart Two: {}",
         day_05::part_2(String::from("input/day_05"))
+    );
+
+    println!("Day 6: Lanternfish");
+    println!(
+        "\tPart One: {}",
+        day_06::part_1(String::from("input/day_06"))
+    );
+    println!(
+        "\tPart Two: {}",
+        day_06::part_2(String::from("input/day_06"))
     );
 }
