@@ -28,18 +28,14 @@ pub fn part_2(inp: String) -> i32 {
     fuel_sum
 }
 
-fn median(inp: &Vec<i32>) -> i32 {
-    let mut pos = inp.clone();
+fn median(inp: &[i32]) -> i32 {
+    let mut pos = inp.to_owned();
     pos.sort_unstable();
     pos[pos.len() / 2]
 }
 
-fn mean(inp: &Vec<i32>) -> i32 {
-    let mut sum = 0;
-    for i in inp {
-        sum += *i;
-    }
-    (sum as f32 / inp.len() as f32).round() as i32
+fn mean(inp: &[i32]) -> i32 {
+    (inp.iter().sum::<i32>() as f64 / inp.len() as f64).round() as i32
 }
 
 fn parse_input(inp: String) -> Vec<i32> {
@@ -66,5 +62,11 @@ mod tests {
     fn test_part_2() {
         let input = String::from("input/day_07_test_1");
         assert_eq!(part_2(input), 168);
+    }
+
+    #[test]
+    fn test_part_1_test_2() {
+        let input = String::from("input/day_07_test_2");
+        assert_eq!(part_1(input), 24);
     }
 }
