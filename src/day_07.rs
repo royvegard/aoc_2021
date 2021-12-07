@@ -2,26 +2,39 @@ use std::fs;
 
 pub fn part_1(inp: String) -> i32 {
     let crab_positions = parse_input(inp);
-    let med = median(&crab_positions);
+    let pos = median(&crab_positions);
+
+    i32::min(
+        fuel_1(&crab_positions, pos),
+        fuel_1(&crab_positions, pos + 1),
+    )
+}
+
+pub fn part_2(inp: String) -> i32 {
+    let crab_positions = parse_input(inp);
+    let pos = mean(&crab_positions);
+
+    i32::min(
+        fuel_2(&crab_positions, pos),
+        fuel_2(&crab_positions, pos + 1),
+    )
+}
+
+fn fuel_1(pos: &[i32], point: i32) -> i32 {
     let mut fuel_sum = 0;
 
-    for c in crab_positions {
-        fuel_sum += i32::abs(c - med);
+    for c in pos {
+        fuel_sum += i32::abs(c - point);
     }
 
     fuel_sum
 }
 
-pub fn part_2(inp: String) -> i32 {
-    let crab_positions = parse_input(inp);
-    let men = mean(&crab_positions) - 1;
+fn fuel_2(pos: &[i32], point: i32) -> i32 {
     let mut fuel_sum = 0;
 
-    for c in crab_positions {
-        let dist = i32::abs(c - men);
-        //        for d in 1..=i32::abs(c - men) {
-        //            fuel_sum += d;
-        //        }
+    for c in pos {
+        let dist = i32::abs(c - point);
         fuel_sum += dist * (dist + 1) / 2;
     }
 
@@ -35,7 +48,7 @@ fn median(inp: &[i32]) -> i32 {
 }
 
 fn mean(inp: &[i32]) -> i32 {
-    (inp.iter().sum::<i32>() as f64 / inp.len() as f64).round() as i32
+    inp.iter().sum::<i32>() / inp.len() as i32
 }
 
 fn parse_input(inp: String) -> Vec<i32> {
